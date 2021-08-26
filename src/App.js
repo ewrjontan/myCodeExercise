@@ -1,73 +1,106 @@
-import logo from './logo.svg';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import React, { Component } from 'react';
+//import { Navbar, NavbarBrand } from 'reactstrap';
 import { Button } from 'reactstrap';
-//import Main from './components/MainComponent';
+//import Main from './components/mainComponent';
+import Search from './components/searchComponent';
 import { 
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link 
+	Link,
+	useHistory 
 } from 'react-router-dom';
 import './App.css';
 
-function App() {
-	return (
-		<Router>
-			<div>
-				<nav>
-					<ul>
-						<li>
-							<Link to="/">Home</Link>
-						</li>
-						<li>
-							<Link to="/search">Search</Link>
-						</li>
-						<li>
-							<Link to="/history">History</Link>
-						</li>
-					</ul>
-				</nav>
 
-				<h1 className="my-5 text-center">Hacker News Search</h1>
+class App extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			searchInput: "",
+			searchHistory: []
+		}
+		this.handleInput = this.handleInput.bind(this);
+		//this.handleSubmit = this.handleSubmit.bind(this); can bind or use arrow functions
+
+	}
+
+	handleInput(event) {
+		this.setState({
+		  searchInput: event.target.value
+		});
+
+		console.log("previous state:");
+		  console.log(this.state.searchInput);
+
+	}
+
+	handleSubmit = (e) => {
+		//e.preventDefault();
+		console.log("submit button clicked, state input is:");
+		console.log(this.state.searchInput);
+	}
+
+	render(){
+
+		return (
+			<Router>
+				<div>
+					<nav>
+						<ul>
+							<li>
+								<Link to="/">Home</Link>
+							</li>
+							<li>
+								<Link to="/search">Search</Link>
+							</li>
+							<li>
+								<Link to="/history">History</Link>
+							</li>
+						</ul>
+					</nav>
+
+					<h1 className="my-5 text-center">Hacker News Search</h1>
 
 
-				<div className="text-center" id="searchForm">
-					<form className="">
-						<input className="col-10 col-md-6" type="text" size="lg" name="search" />
-					</form>
+					<div className="text-center" id="searchForm">
+						<div>
+							<input className="col-10 col-md-4" type="text" name="search" value={this.state.searchInput} onChange={this.handleInput}/>
+						</div>
 
-					<Link to="/search">
-						<Button className="col-10 col-md-2 text-white mt-5" color="warning" type="submit">Go</Button>
-					</Link>
-					
+						<Link to="/search">
+							<Button className="col-10 col-md-2 text-white mt-5" color="warning" type="submit" onClick={this.handleSubmit}>Search</Button>
+						</Link>
+
+						
+						
+					</div>
+
+					<Switch>
+						<Route path="/search" component={Search}/>
+
+						<Route path="/history">
+							<History />
+						</Route>
+
+						<Route path="/">
+							<Home />
+						</Route>
+					</Switch>
+
 				</div>
-
-				<Switch>
-					<Route path="/search">
-						<Search />
-					</Route>
-
-					<Route path="/history">
-						<History />
-					</Route>
-
-					<Route path="/">
-						<Home />
-					</Route>
-				</Switch>
-
-			</div>
-		</Router>
-	);
+			</Router>
+		);
+	}
 }
 
 function Home() {
 	return <h2>Home</h2>;
 }
 
-function Search() {
+/*function Search() {
 	return <h2>Search</h2>;
-}
+}*/
 
 function History() {
 	return <h2>History</h2>;
