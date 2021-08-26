@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import { Navbar, NavbarBrand } from 'reactstrap';
+import { Button } from 'reactstrap';
 import Home from './HomeComponent';
 import Search from './SearchComponent';
 //import History from './HistoryComponent';
@@ -7,6 +8,7 @@ import {
 	Switch,
 	Route,
 	Redirect, 
+    Link
 } from 'react-router-dom';
 
 
@@ -50,19 +52,54 @@ class App extends Component {
 
             <div>
                 <Switch>
-                    <Route path='/home' component={HomePage} />
-                    <Route path='/search' component={Search}/>
+						<Route path="/search" component={Search}/>
 
-                    <Route path='/history'>
-                        <History />
-                    </Route>
+						<Route path="/history">
+							<History />
+						</Route>
 
-                    <Redirect to='/home' />
-
-                </Switch>
+						<Route path="/">
+							<Home />
+						</Route>
+					</Switch>
             </div>
 
-			
+			<Router>
+				<div>
+					<nav>
+						<ul>
+							<li>
+								<Link to="/">Home</Link>
+							</li>
+							<li>
+								<Link to="/search">Search</Link>
+							</li>
+							<li>
+								<Link to="/history">History</Link>
+							</li>
+						</ul>
+					</nav>
+
+					<h1 className="my-5 text-center">Hacker News Search</h1>
+
+
+					<div className="text-center" id="searchForm">
+						<div>
+							<input className="col-10 col-md-4" type="text" name="search" value={this.state.searchInput} onChange={this.handleInput}/>
+						</div>
+
+						<Link to="/search">
+							<Button className="col-10 col-md-2 text-white mt-5" color="warning" type="submit" onClick={this.handleSubmit}>Search</Button>
+						</Link>
+
+						
+						
+					</div>
+
+					
+
+				</div>
+			</Router>
 		);
 	}
 }
