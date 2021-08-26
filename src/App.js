@@ -1,32 +1,76 @@
 import logo from './logo.svg';
 import { Navbar, NavbarBrand } from 'reactstrap';
+import { Button } from 'reactstrap';
+//import Main from './components/MainComponent';
+import { 
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link 
+} from 'react-router-dom';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+	return (
+		<Router>
+			<div>
+				<nav>
+					<ul>
+						<li>
+							<Link to="/">Home</Link>
+						</li>
+						<li>
+							<Link to="/search">Search</Link>
+						</li>
+						<li>
+							<Link to="/history">History</Link>
+						</li>
+					</ul>
+				</nav>
 
-      <Navbar dark color="primary">
-        <div className="container">
-            <NavbarBrand href="/">NuCamp</NavbarBrand>
-        </div>
-      </Navbar>
-    </div>
-  );
+				<h1 className="my-5 text-center">Hacker News Search</h1>
+
+
+				<div className="text-center" id="searchForm">
+					<form className="">
+						<input className="col-10 col-md-6" type="text" size="lg" name="search" />
+					</form>
+
+					<Link to="/search">
+						<Button className="col-10 col-md-2 text-white mt-5" color="warning" type="submit">Go</Button>
+					</Link>
+					
+				</div>
+
+				<Switch>
+					<Route path="/search">
+						<Search />
+					</Route>
+
+					<Route path="/history">
+						<History />
+					</Route>
+
+					<Route path="/">
+						<Home />
+					</Route>
+				</Switch>
+
+			</div>
+		</Router>
+	);
+}
+
+function Home() {
+	return <h2>Home</h2>;
+}
+
+function Search() {
+	return <h2>Search</h2>;
+}
+
+function History() {
+	return <h2>History</h2>;
 }
 
 export default App;
