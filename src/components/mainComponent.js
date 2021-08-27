@@ -27,6 +27,7 @@ class Main extends Component {
         console.log('main comp mounted');
         console.log('initial history');
         console.log(this.props.searchHistory);
+        console.log(this.props);
     }
 
 	render(){

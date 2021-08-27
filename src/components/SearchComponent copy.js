@@ -1,33 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Link, withRouter } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 
-import { fetchCampsites } from '../redux/ActionCreators'
-//import { Reducer } from './redux/reducer'
-import { connect } from 'react-redux'
 
+/*class Search extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            
+        };
 
-const mapStateToProps = state => {
-    return {
-        isLoading: state.isLoading,
-        errMess: state.errMess,
-        campsites: state.campsites
     }
-}
 
-const mapDispatchToProps = {
-    fetchCampsites 
-}
+    render(){
+        return(
+            <div>Hello</div>
+        )
+    };
+};*/
+
+
 
 function Search() {
     const location = useLocation();
     const { searchInput } = location.state
-    /*const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [searchResults, setSearchResults] = useState([]);*/
+    const [searchResults, setSearchResults] = useState([]);
 
     function RenderResults(){
-        /*if (searchResults.length !== 0){
+        if (searchResults.length !== 0){
             return (
                 <React.Fragment>
                     <Stagger in>
@@ -52,21 +54,13 @@ function Search() {
             return (
                 <React.Fragment>No Results Found.</React.Fragment>
             )
-        }*/
-
-        return (
-            <h2>the search component works</h2>
-        )
+        }
     }
 
     useEffect(() => {
         console.log("search input state: " + searchInput);
-        console.log('props:');
-        console.log(this.props);
-        this.props.fetchCampsites(searchInput);
-    
 
-        /*fetch(`http://hn.algolia.com/api/v1/search?query=${searchInput}`)
+        fetch(`http://hn.algolia.com/api/v1/search?query=${searchInput}`)
             .then(response => response.json())
             .then(
                 (result) => {
@@ -77,30 +71,25 @@ function Search() {
                     setIsLoaded(true);
                     setError(error);
                 }
-            )*/
+            )
     }, [searchInput]);
 
-    /*if (this.props.errMess) {
-        //return <div>Error: {error.message}</div>;
-        return <div>Error: insert error message here</div>;
-    }else if (this.props.isLoading) {
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }else if (!isLoaded) {
         return <div>Loading...</div>;
     }else {
-        //console.log(searchResults);
+        console.log(searchResults);
         return (
             <div className="mt-5">
                 <h1>Showing results for "{searchInput}"</h1>
                 <RenderResults />
             </div>
         )
-    }*/
-
-    return (
-        <h2>search results page</h2>
-    )
-    
+    }
 }
 
 
-//export default Search;
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+
+export default Search;
+
