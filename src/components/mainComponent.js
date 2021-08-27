@@ -9,24 +9,31 @@ import {
 	Route,
 	Redirect, 
     Link,
-    NavLink
+    NavLink,
+    withRouter
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
-class App extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			
-		}
-		
-	}
+const mapStateToProps = state => {
+    return {
+        searchHistory: state.searchHistory,
+    };
+}
+
+class Main extends Component {
+	
+    componentDidMount(){
+        console.log('main comp mounted');
+        console.log('initial history');
+        console.log(this.props.searchHistory);
+    }
 
 	render(){
 
         const HomePage = () => {
             return (
-                <Home />
+                <Home/>
             )
         }
 
@@ -50,11 +57,16 @@ class App extends Component {
 
                 <Switch>
                     <Route path='/home' component={HomePage} />
+
+
                     <Route path='/search' component={Search}/>
 
-                    <Route path='/history'>
-                        <History />
-                    </Route>
+                    <Route 
+                        exact path='/history' 
+                        render={() => 
+                            <History searchHistory={this.props.searchHistory}/>
+                        }
+                    />
 
                     <Redirect to='/home' />
 
@@ -67,7 +79,14 @@ class App extends Component {
 }
 
 /*function Home() {
-	return <h2>Home</h2>;
+	return (
+        <div>
+            <h2>Home</h2>
+
+            <input />
+        </div>
+        
+    )
 }*/
 
 /*function Search() {
@@ -75,7 +94,11 @@ class App extends Component {
 }*/
 
 function History() {
-	return <h2>History</h2>;
+	return (
+        <div>
+            <h2>History</h2>
+        </div>
+    );
 }
 
-export default App;
+export default withRouter(connect(mapStateToProps)(Main));
