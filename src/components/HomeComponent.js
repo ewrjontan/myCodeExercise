@@ -44,7 +44,15 @@ class Home extends Component {
                         <input className="col-10 col-md-4" type="text" name="search" value={this.state.searchInput} onChange={this.handleInput}/>
                     </div>
 
-                    <Link to="/search">
+                    {/*<Link to="/search">*/}
+                    <Link 
+                        to={{
+                            pathname: "/search",
+                            state: {
+                                searchInput: this.state.searchInput
+                            }
+                        }}
+                    >
                         <Button className="col-10 col-md-2 text-white mt-5" color="warning" type="submit" onClick={this.handleSubmit}>Search</Button>
                     </Link> 
                 </div>

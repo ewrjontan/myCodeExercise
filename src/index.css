@@ -15,3 +15,8 @@ code {
 #searchForm{
   margin-top: 200px;
 }
+
+.resultCard{
+  background-color: #5466A6; 
+  color: white;
+}
