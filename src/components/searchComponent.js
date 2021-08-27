@@ -81,7 +81,7 @@ function Search() {
     }else {
         console.log(searchResults);
         return (
-            <div>
+            <div className="mt-5">
                 <h1>Showing results for "{searchInput}"</h1>
                 <RenderResults />
             </div>

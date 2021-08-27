@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import { Navbar, NavbarBrand } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
 import Home from './HomeComponent';
 import Search from './SearchComponent';
 //import History from './HistoryComponent';
@@ -7,6 +7,8 @@ import {
 	Switch,
 	Route,
 	Redirect, 
+    Link,
+    NavLink
 } from 'react-router-dom';
 
 
@@ -49,6 +51,20 @@ class App extends Component {
 		return (
 
             <div>
+                <Navbar color="dark" light  sticky="top" expand="md">
+                    <div className="container mx-auto text-center">
+                    <Nav className="mx-auto col col-3 d-flex justify-content-around" navbar>
+                        <NavItem>
+                            <NavLink to="/" style={{color: 'white', textDecoration: 'none' }}>Home</NavLink>
+                        </NavItem>
+                        
+                        <NavItem>
+                            <NavLink to="/history" style={{color: 'white', textDecoration: 'none' }}>History</NavLink>
+                        </NavItem>
+                    </Nav>
+                    </div>
+                </Navbar>
+
                 <Switch>
                     <Route path='/home' component={HomePage} />
                     <Route path='/search' component={Search}/>
