@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import Search from './SearchComponent';
 //import History from './HistoryComponent';
@@ -16,28 +17,9 @@ class App extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			searchInput: "",
-			searchHistory: []
+			
 		}
-		this.handleInput = this.handleInput.bind(this);
-		//this.handleSubmit = this.handleSubmit.bind(this); can bind or use arrow functions
-
-	}
-
-	handleInput(event) {
-		this.setState({
-		  searchInput: event.target.value
-		});
-
-		console.log("previous state:");
-		  console.log(this.state.searchInput);
-
-	}
-
-	handleSubmit = (e) => {
-		//e.preventDefault();
-		console.log("submit button clicked, state input is:");
-		console.log(this.state.searchInput);
+		
 	}
 
 	render(){
@@ -51,19 +33,20 @@ class App extends Component {
 		return (
 
             <div>
-                <Navbar color="dark" light  sticky="top" expand="md">
+                {/*<Navbar color="dark" light  sticky="top" expand="md">
                     <div className="container mx-auto text-center">
                     <Nav className="mx-auto col col-3 d-flex justify-content-around" navbar>
                         <NavItem>
-                            <NavLink to="/" style={{color: 'white', textDecoration: 'none' }}>Home</NavLink>
+                            <Link to="/" style={{color: 'white', textDecoration: 'none' }}>Search</Link>
                         </NavItem>
                         
                         <NavItem>
-                            <NavLink to="/history" style={{color: 'white', textDecoration: 'none' }}>History</NavLink>
+                            <Link to="/history" style={{color: 'white', textDecoration: 'none' }}>History</Link>
                         </NavItem>
                     </Nav>
                     </div>
-                </Navbar>
+                </Navbar>*/}
+                <Header />
 
                 <Switch>
                     <Route path='/home' component={HomePage} />
