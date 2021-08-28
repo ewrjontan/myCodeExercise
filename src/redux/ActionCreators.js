@@ -3,9 +3,10 @@ import * as ActionTypes from './ActionTypes';
 
 export const fetchSearchResults = (searchInput) => dispatch => {
 
-    dispatch(campsitesLoading());
+    dispatch(searchResultsLoading());
 
     return fetch(`http://hn.algolia.com/api/v1/search?query=${searchInput}`)
+    //return fetch(`http://hn.algolia.com/api/v1/search?query=cars`)
         .then(response => {
                 if (response.ok){
                     return response;
@@ -21,22 +22,22 @@ export const fetchSearchResults = (searchInput) => dispatch => {
             }
         )
         .then(response => response.json())
-        .then(campsites => dispatch(addCampsites(campsites)))
-        .catch(error => dispatch(campsitesFailed(error.message)));
+        .then(searchResults => dispatch(addSearchResults(searchResults.hits)))
+        .catch(error => dispatch(searchResultsFailed(error.message)));
 };
 
-export const campsitesLoading = () => ({
-    type: ActionTypes.CAMPSITES_LOADING
+export const searchResultsLoading = () => ({
+    type: ActionTypes.SEARCH_RESULTS_LOADING
 });
 
-export const campsitesFailed = errMess => ({
-    type: ActionTypes.CAMPSITES_FAILED,
+export const searchResultsFailed = errMess => ({
+    type: ActionTypes.SEARCH_RESULTS_FAILED,
     payload: errMess
 });
 
-export const addCampsites = campsites => ({
-    type: ActionTypes.ADD_CAMPSITES,
-    payload: campsites
+export const addSearchResults = results => ({
+    type: ActionTypes.ADD_SEARCH_RESULTS,
+    payload: results
 });
 
 

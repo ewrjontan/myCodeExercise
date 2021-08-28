@@ -19,7 +19,8 @@ const mapStateToProps = state => {
     return {
         searchHistory: state.searchHistory,
         isLoading: state.isLoading,
-        errMess: state.errMess
+        errMess: state.errMess,
+        searchResults: state.searchResults
     };
 }
 

@@ -57,10 +57,10 @@ function Search(props) {
             );
         }
 
-
-        /*if (props.searchResults.length !== 0){
+        if (props.searchResults.length !== 0){
             return (
                 <React.Fragment>
+                    <h1 className="my-5">Showing results for "{searchInput}"</h1>
                     <Stagger in>
                     {props.searchResults.map(result => {
                         return (
@@ -81,22 +81,20 @@ function Search(props) {
             )    
         }else{
             return (
-                <React.Fragment>No Results Found.</React.Fragment>
+                <div className="mx-auto my-5 col-10 col-md-5 text-break bg-primary">
+                    <h3 className="my-5">No results found for "{searchInput}"</h3>
+                </div>
             )
-        }*/
+        }
 
-        /*
-        return (
-            <h2>the search component works</h2>
-        )*/
     }
 
     useEffect(() => {
         console.log('on search page');
-        //console.log("search input state: " + searchInput);
+        console.log("search input state: " + searchInput);
         console.log('props:');
         console.log(props);
-        //props.fetchSearchResults(searchInput);
+        props.fetchSearchResults(searchInput);
     
 
         /*fetch(`http://hn.algolia.com/api/v1/search?query=${searchInput}`)
@@ -130,7 +128,6 @@ function Search(props) {
 
     return (
         <div>
-            <h1 className="my-5">search results page</h1>
             <RenderResults/>
         </div>
         

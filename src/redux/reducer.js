@@ -31,15 +31,15 @@ import * as ActionTypes from './ActionTypes';
 export const Reducer = (state = {
     isLoading: true,
     errMess: null,
-    searchResults: [], 
+    searchResults: null, 
     searchHistory: []
 }, action) => {
     switch(action.type) {
-        case ActionTypes.ADD_CAMPSITES:
+        case ActionTypes.ADD_SEARCH_RESULTS:
             return {...state, isLoading: false, errMess: null, searchResults: action.payload};
-        case ActionTypes.CAMPSITES_LOADING:
-            return {...state, isLoading: true, errMess: null, searchResults: []};
-        case ActionTypes.CAMPSITES_FAILED:
+        case ActionTypes.SEARCH_RESULTS_LOADING:
+            return {...state, isLoading: true, errMess: null, searchResults: null};
+        case ActionTypes.SEARCH_RESULTS_FAILED:
             return {...state, isLoading: false, errMess: action.payload};    
         case ActionTypes.UPDATE_HISTORY:
             const searchQuery = action.payload;
