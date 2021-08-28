@@ -18,7 +18,8 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => {
     return {
         searchHistory: state.searchHistory,
-        isLoading: state.isLoading
+        isLoading: state.isLoading,
+        errMess: state.errMess
     };
 }
 

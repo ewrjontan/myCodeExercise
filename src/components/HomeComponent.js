@@ -81,11 +81,15 @@ class Home extends Component {
 		console.log(this.state.searchInput);
         console.log(`valid input: ${this.state.validInput}`)
 
+        console.log('length of searchh history');
+        console.log(this.props.searchHistory);
+
         if (this.state.validInput) {
             console.log("submit button clicked, value is: " + this.state.searchInput);
 
-            //add valid search input into redux history state
-            this.props.addSearchQuery(this.state.searchInput);
+            let newId = this.props.searchHistory.length;
+            //add valid search input and id into redux searchHistory state
+            this.props.addSearchQuery(this.state.searchInput, newId);
 
             //console.log('changing pathname to /search');
 

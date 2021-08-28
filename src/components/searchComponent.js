@@ -3,7 +3,7 @@ import { Loading } from './LoadingComponent';
 import { useLocation, Link, withRouter } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 
-//import { /*fetchCampsites*/ addSearchQuery } from '../redux/ActionCreators'
+import { fetchSearchResults } from '../redux/ActionCreators'
 //import { Reducer } from './redux/reducer'
 import { connect } from 'react-redux'
 
@@ -12,13 +12,14 @@ const mapStateToProps = state => {
     return {
         isLoading: state.isLoading,
         errMess: state.errMess,
-        campsites: state.campsites
+        searchResults: state.searchResults
     }
 }
 
 const mapDispatchToProps = {
     //fetchCampsites
-    //addSearchQuery 
+    //addSearchQuery
+    fetchSearchResults 
 }
 
 function Search(props) {
@@ -44,12 +45,24 @@ function Search(props) {
             );
         }
 
+        if (props.errMess){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <h4>{props.errMess}</h4>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
 
-        /*if (searchResults.length !== 0){
+
+        /*if (props.searchResults.length !== 0){
             return (
                 <React.Fragment>
                     <Stagger in>
-                    {searchResults.map(result => {
+                    {props.searchResults.map(result => {
                         return (
                             <Fade in key={result.objectID}>
                                 <Link to={{ pathname: result.url }} style={{ textDecoration: 'none' }} target="_blank"> 
@@ -72,9 +85,10 @@ function Search(props) {
             )
         }*/
 
+        /*
         return (
             <h2>the search component works</h2>
-        )
+        )*/
     }
 
     useEffect(() => {
@@ -82,7 +96,7 @@ function Search(props) {
         //console.log("search input state: " + searchInput);
         console.log('props:');
         console.log(props);
-        //this.props.fetchCampsites(searchInput);
+        //props.fetchSearchResults(searchInput);
     
 
         /*fetch(`http://hn.algolia.com/api/v1/search?query=${searchInput}`)

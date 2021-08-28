@@ -1,7 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 
 
-export const fetchCampsites = (searchInput) => dispatch => {
+export const fetchSearchResults = (searchInput) => dispatch => {
 
     dispatch(campsitesLoading());
 
@@ -40,10 +40,11 @@ export const addCampsites = campsites => ({
 });
 
 
-export const addSearchQuery = (searchInput) => (dispatch) => {
+export const addSearchQuery = (searchInput, id) => (dispatch) => {
     const newSearchQuery = {
         searchInput: searchInput,
-        date: new Date().toISOString()
+        date: new Date().toISOString(),
+        id: id
     }
 
     dispatch(updateHistory(newSearchQuery));
