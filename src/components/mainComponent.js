@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => {
     return {
         searchHistory: state.searchHistory,
+        isLoading: state.isLoading
     };
 }
 
@@ -26,7 +27,7 @@ class Main extends Component {
     componentDidMount(){
         console.log('main comp mounted');
         console.log('initial history');
-        console.log(this.props.searchHistory);
+        console.log(this.props);
     }
 
 	render(){

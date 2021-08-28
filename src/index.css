@@ -20,3 +20,8 @@ code {
   background-color: #5466A6; 
   color: white;
 }
+
+#searchComponentMainContainer{
+  height: 100vh;
+  
+}

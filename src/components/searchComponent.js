@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Loading } from './LoadingComponent';
 import { useLocation, Link, withRouter } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 
@@ -31,6 +32,19 @@ function Search(props) {
     const [searchResults, setSearchResults] = useState([]);*/
 
     function RenderResults(){
+
+        if (props.isLoading){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+
+                    </div>
+                </div>
+            );
+        }
+
+
         /*if (searchResults.length !== 0){
             return (
                 <React.Fragment>
@@ -101,7 +115,13 @@ function Search(props) {
     }*/
 
     return (
-        <h2>search results page</h2>
+        <div>
+            <h1 className="my-5">search results page</h1>
+            <RenderResults/>
+        </div>
+        
+
+
     )
     
 }

@@ -43,7 +43,7 @@ export const Reducer = (state = {
             return {...state, isLoading: false, errMess: action.payload};    
         case ActionTypes.UPDATE_HISTORY:
             const searchQuery = action.payload;
-            return {...state, isLoading: false, searchHistory: state.searchHistory.concat(searchQuery)};   
+            return {...state, searchHistory: state.searchHistory.concat(searchQuery)};   
         default:
             return state;
     }
