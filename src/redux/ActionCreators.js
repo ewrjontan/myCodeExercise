@@ -38,3 +38,18 @@ export const addCampsites = campsites => ({
     type: ActionTypes.ADD_CAMPSITES,
     payload: campsites
 });
+
+
+export const addSearchQuery = (searchInput) => (dispatch) => {
+    const newSearchQuery = {
+        searchInput: searchInput,
+        date: new Date().toISOString()
+    }
+
+    dispatch(updateHistory(newSearchQuery));
+};
+
+export const updateHistory = searchQuery => ({
+    type: ActionTypes.UPDATE_HISTORY,
+    payload: searchQuery
+});

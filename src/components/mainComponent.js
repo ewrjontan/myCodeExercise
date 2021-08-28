@@ -3,7 +3,7 @@ import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import Search from './SearchComponent';
-//import History from './HistoryComponent';
+import History from './HistoryComponent';
 import { 
 	Switch,
 	Route,
@@ -27,7 +27,6 @@ class Main extends Component {
         console.log('main comp mounted');
         console.log('initial history');
         console.log(this.props.searchHistory);
-        console.log(this.props);
     }
 
 	render(){
@@ -62,12 +61,14 @@ class Main extends Component {
 
                     <Route path='/search' component={Search}/>
 
-                    <Route 
+                    {/*<Route 
                         exact path='/history' 
                         render={() => 
                             <History searchHistory={this.props.searchHistory}/>
                         }
-                    />
+                    />*/}
+
+                    <Route path='/history' component={History}/>
 
                     <Redirect to='/home' />
 
@@ -94,12 +95,12 @@ class Main extends Component {
 	return <h2>Search</h2>;
 }*/
 
-function History() {
+/*function History() {
 	return (
         <div>
             <h2>History</h2>
         </div>
     );
-}
+}*/
 
 export default withRouter(connect(mapStateToProps)(Main));

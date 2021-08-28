@@ -32,7 +32,7 @@ export const Reducer = (state = {
     isLoading: true,
     errMess: null,
     campsites: [], 
-    searchHistory: ['cars']
+    searchHistory: []
 }, action) => {
     switch(action.type) {
         case ActionTypes.ADD_CAMPSITES:
@@ -41,6 +41,9 @@ export const Reducer = (state = {
             return {...state, isLoading: true, errMess: null, campsites: []};
         case ActionTypes.CAMPSITES_FAILED:
             return {...state, isLoading: false, errMess: action.payload};    
+        case ActionTypes.UPDATE_HISTORY:
+            const searchQuery = action.payload;
+            return {...state, isLoading: false, searchHistory: state.searchHistory.concat(searchQuery)};   
         default:
             return state;
     }

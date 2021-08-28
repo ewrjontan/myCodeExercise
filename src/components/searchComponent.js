@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link, withRouter } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 
-import { fetchCampsites } from '../redux/ActionCreators'
+//import { /*fetchCampsites*/ addSearchQuery } from '../redux/ActionCreators'
 //import { Reducer } from './redux/reducer'
 import { connect } from 'react-redux'
 
@@ -16,12 +16,16 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    fetchCampsites 
+    //fetchCampsites
+    //addSearchQuery 
 }
 
-function Search() {
+function Search(props) {
     const location = useLocation();
     const { searchInput } = location.state
+    console.log('search input');
+    console.log(searchInput);
+
     /*const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [searchResults, setSearchResults] = useState([]);*/
@@ -60,10 +64,11 @@ function Search() {
     }
 
     useEffect(() => {
-        console.log("search input state: " + searchInput);
+        console.log('on search page');
+        //console.log("search input state: " + searchInput);
         console.log('props:');
-        console.log(this.props);
-        this.props.fetchCampsites(searchInput);
+        console.log(props);
+        //this.props.fetchCampsites(searchInput);
     
 
         /*fetch(`http://hn.algolia.com/api/v1/search?query=${searchInput}`)

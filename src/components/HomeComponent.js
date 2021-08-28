@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, useHistory  } from 'react-router-dom';
 import { connect } from "react-redux";
+import { addSearchQuery } from '../redux/ActionCreators'
 
 const mapStateToProps = state => {
     return {
@@ -10,90 +11,100 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    
+    addSearchQuery
 }
+
+//For input validation (matches characters after any white space at start of input)
+const regex = /[a-zA-Z0-9_]+.*$/i;
+
+
 
 class Home extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			searchInput: "",
-            validInput: false
+            validInput: false,
+            pathName: ""
 			//searchHistory: []
 		}
 		//this.handleInput = this.handleInput.bind(this);
-		//this.handleSubmit = this.handleSubmit.bind(this); can bind or use arrow functions
+		//this.handleSubmit = this.handleSubmit.bind(this); //can bind or use arrow functions
 
 	}
 
     componentDidMount(){
-        
+        /*this.setState({
+            pathName: ""
+        })*/    
     }
 
 	handleInput = (event) => {
-        /*if (event.target.value !== ""){
-            //console.log("input is valid");
-
-            this.setState({
-                searchInput: event.target.value,
-                validInput: true
-            });
-
-            console.log('validInput: ' + this.state.validInput);
-            console.log("previous state:");
-            console.log(this.state.searchInput);
-            
-        }else {
-            this.setState({
-                validInput: false
-            })
-            console.log('validInput: ' + this.state.validInput);
-        }*/
-
-		this.setState({
+		/*this.setState({
             searchInput: event.target.value,
-        });
+        });*/
+
         console.log("previous state:");
         console.log(this.state.searchInput);
+
+        //For input validation (removes possible whitespace in front of valid characters)
+        if (event.target.value.match(regex)){
+            console.log('input is valid');
+            let validatedInput = event.target.value.match(regex)[0];
+            console.log('regex match');
+            console.log(validatedInput);
+            //pathname is changed to prevent navigating to search page without a valid input
+            //setState does not update within Link element otherwise would have placed within handleSubmit()  
+            console.log('changing pathname to /search');
+            this.setState({
+                pathName: "/search",
+                validInput: true,
+                searchInput: validatedInput
+            })
+
+        }else{
+            console.log('input is INVALID');
+            console.log('changing pathname to ""');
+
+            //reset state
+            this.setState({
+                pathName: "",
+                validInput: false,
+                searchInput: event.target.value
+            })    
+        }
 	}
 
+    //handleSubmit(event) {
 	handleSubmit = () => {
-		console.log("submit button clicked, search input is:");
+		console.log("submit button clicked");
 		console.log(this.state.searchInput);
+        console.log(`valid input: ${this.state.validInput}`)
 
-        if (this.state.searchInput.length > 0) {
-            // Task: add a new line to dispatch the state value to the action creator
+        if (this.state.validInput) {
             console.log("submit button clicked, value is: " + this.state.searchInput);
-            //this.props.addTodo(this.state.todoInput);
+
+            //add valid search input into redux history state
+            this.props.addSearchQuery(this.state.searchInput);
+
+            //console.log('changing pathname to /search');
+
+            /*this.setState({
+                pathName: "/search"
+            });
+
+            console.log('pathName is: ');
+
+            console.log(this.state.pathName);
+            //this.props.addTodo(this.state.todoInput);*/
             
       
             //This line doesn't change
-            this.setState({ searchInput: '' })
+            //this.setState({ searchInput: '' })
         }else{
-            alert('Please enter a search query');
+            alert('Please enter a valid input');
         }
 
-        /*if (this.state.searchInput === "") {
-            alert("No input present");
-            //setError("Fields are required");
-            return;
-        }*/
-          
-        //props.register({ name, email, password });
-
-
-
-        /*console.log("current history");
-        console.log(this.state.searchHistory);
-        
-        let updatedHistory = this.state.searchHistory;
-        updatedHistory.push(this.state.searchInput);
-        
-        console.log("new history:");
-        console.log(updatedHistory);
-        this.setState({
-            searchHistory: updatedHistory
-        });*/
 	}
 
     handleHistory = (e) => {
@@ -112,10 +123,11 @@ class Home extends Component {
 
                 <div className="text-center">
                     <div>
-                        {/*<input className="col-10 col-md-4" type="text" name="search" value={this.state.searchInput} onChange={this.handleInput}/>*/}
-                        <input className="col-10 col-md-4" type="text" name="search" value={this.state.searchInput} onChange={(e) => this.setState({ searchInput: e.target.value })}/>
+                        <input className="col-10 col-md-4" type="text" name="search" value={this.state.searchInput} onChange={this.handleInput}/>
+                        {/*<input className="col-10 col-md-4" type="text" name="search" value={this.state.searchInput} onChange={(e) => this.setState({ searchInput: e.target.value })}/>*/}
                     </div>
                     
+
                     {/*<Button 
                         className="col-10 col-md-12 mt-5 text-white" 
                         color="warning" 
@@ -126,31 +138,39 @@ class Home extends Component {
                     </Button>*/}
 
                     {/*<Link to="/search">*/}
+                    
+                    
+                    
+
                     <Link 
+                        className="col-10 col-md-2 btn btn-warning text-white mt-3"
+                        onClick={this.handleSubmit}
                         to={{
-                            pathname: "/search",
+                            pathname: this.state.pathName,
                             state: {
                                 searchInput: this.state.searchInput
                             }
                         }}
                     >
-                        {/*<Button className="col-10 col-md-2 text-white mt-5" color="warning" type="submit" onClick={this.handleSubmit}>Search</Button>*/}
+                        Search
                     </Link> 
 
-                    <div className="row col-10 col-md-4 mx-auto mt-3 d-flex justify-content-around">
+                    {/*<div className="row col-10 col-md-4 mx-auto mt-3 d-flex justify-content-around">
                         <Link 
                             className="col-12 col-md-4 btn btn-warning text-white mb-3 mb-md-0"
                             onClick={this.handleSubmit}
                             to={{
-                                pathname: "/search",
+                                pathname: this.state.pathName,
                                 state: {
                                     searchInput: this.state.searchInput
                                 }
                             }}
                         >
-                            Search
-                            {/*<Button className="col col-md-12 text-white" color="warning" type="submit" onClick={this.handleSubmit}>Search</Button>*/}
+                            Search original
+                            {/*<Button className="col col-md-12 text-white" color="warning" type="submit" onClick={this.handleSubmit}>Search2</Button>
                         </Link> 
+
+                        
 
                         <Link 
                             className="col-12 col-md-4 btn btn-warning text-white mb-3 mb-md-0"
@@ -164,7 +184,7 @@ class Home extends Component {
                         >
                             View History
                         </Link> 
-                    </div>
+                        </div>*/}
                 </div>
 
             </div>
