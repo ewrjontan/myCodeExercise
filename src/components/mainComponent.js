@@ -24,6 +24,34 @@ const mapStateToProps = state => {
     };
 }
 
+function Main(props) {
+    return (
+        <div>
+            <Header />
+
+            <Switch>
+                <Route path='/home' component={Home} />
+
+
+                <Route path='/search' component={Search}/>
+
+                {/*<Route 
+                    exact path='/history' 
+                    render={() => 
+                        <History searchHistory={this.props.searchHistory}/>
+                    }
+                />*/}
+
+                <Route path='/history' component={History}/>
+
+                <Redirect to='/home' />
+
+            </Switch>
+        </div>
+    )
+}
+
+/*
 class Main extends Component {
 	
     componentDidMount(){
@@ -43,19 +71,6 @@ class Main extends Component {
 		return (
 
             <div>
-                {/*<Navbar color="dark" light  sticky="top" expand="md">
-                    <div className="container mx-auto text-center">
-                    <Nav className="mx-auto col col-3 d-flex justify-content-around" navbar>
-                        <NavItem>
-                            <Link to="/" style={{color: 'white', textDecoration: 'none' }}>Search</Link>
-                        </NavItem>
-                        
-                        <NavItem>
-                            <Link to="/history" style={{color: 'white', textDecoration: 'none' }}>History</Link>
-                        </NavItem>
-                    </Nav>
-                    </div>
-                </Navbar>*/}
                 <Header />
 
                 <Switch>
@@ -64,46 +79,15 @@ class Main extends Component {
 
                     <Route path='/search' component={Search}/>
 
-                    {/*<Route 
-                        exact path='/history' 
-                        render={() => 
-                            <History searchHistory={this.props.searchHistory}/>
-                        }
-                    />*/}
-
                     <Route path='/history' component={History}/>
 
                     <Redirect to='/home' />
 
                 </Switch>
             </div>
-
-			
 		);
 	}
-}
-
-/*function Home() {
-	return (
-        <div>
-            <h2>Home</h2>
-
-            <input />
-        </div>
-        
-    )
 }*/
 
-/*function Search() {
-	return <h2>Search</h2>;
-}*/
-
-/*function History() {
-	return (
-        <div>
-            <h2>History</h2>
-        </div>
-    );
-}*/
 
 export default withRouter(connect(mapStateToProps)(Main));
