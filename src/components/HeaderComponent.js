@@ -10,18 +10,19 @@ class Header extends Component{
     render (){
         return(
             <React.Fragment>
-                <Navbar color="dark" light  sticky="top" expand="md">
-                    <div className="container mx-auto text-center">
-                        <Nav className="mx-auto col col-3 d-flex justify-content-around" navbar>
-                            <NavItem>
-                                <Link to="/home" style={{color: 'white', textDecoration: 'none' }}>Search</Link>
+                <Navbar color="dark" light  sticky="top">
+                    {/* className="container mx-auto text-center"*/}
+                    {/*col col-md-6 col-lg-4*/}
+                        <Nav className="mx-auto row col col-sm-7 col-lg-3">
+                            <NavItem className="col-6">
+                                <Link to="/home" style={{color: 'white', textDecoration: 'none' }}>Home</Link>
                             </NavItem>
                             
-                            <NavItem>
+                            <NavItem className="col-6">
                                 <Link to="/history" style={{color: 'white', textDecoration: 'none' }}>History</Link>
                             </NavItem>
                         </Nav>
-                    </div>
+                    
                 </Navbar>
 
             </React.Fragment>
