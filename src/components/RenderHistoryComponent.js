@@ -12,17 +12,30 @@ const mapStateToProps = state => {
 
 function RenderHistory(props) {
     console.log("render history");
-    console.log(props)
+    console.log(props.searchHistory)
+    
+    let arrToReverse = props.searchHistory;
+    let historyReversed = [...arrToReverse].reverse();
+
+    console.log('reversed history');
+    console.log(historyReversed);
+
     return (
         <React.Fragment>
             <Stagger in>
-                {props.searchHistory.map(pastSearch => {
+                {historyReversed.map(pastSearch => {
                     return (
                         <Fade in key={pastSearch.id}>
                                 <div className="resultCard rounded mx-auto col-11 col-md-5 col-lg-4 my-5 py-3 px-3 text-start">
+                                    <div className="row">
+                                        <h5 className="col-12 col-lg-6 col-xl-3">Search Query:</h5>
+                                        <h5 className="col">{pastSearch.searchInput}</h5>
+                                    </div>
+                                    <div className="row">
+                                        <h5 className="col-12 col-lg-6 col-xl-3">Date of Search:</h5>
+                                        <h5 className="col">{pastSearch.date}</h5>
+                                    </div>
                                     
-                                    <h4>Search Query: {pastSearch.searchInput}</h4>
-                                    <h4>Date of Search: {pastSearch.date}</h4>
 
                                 </div>
                         </Fade>
