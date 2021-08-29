@@ -58,21 +58,26 @@ function Search(props) {
         }
 
         if (props.searchResults.length !== 0){
+            
+            let results = props.searchResults;
+
             return (
                 <React.Fragment>
-                    <h1 className="my-5">Showing results for "{searchInput}"</h1>
+                    <h1 className="my-5">Showing results for"{searchInput}"</h1>
                     <Stagger in>
-                    {props.searchResults.map(result => {
+                    {results.map(result => {
                         return (
                             <Fade in key={result.objectID}>
-                                <Link to={{ pathname: result.url }} style={{ textDecoration: 'none' }} target="_blank"> 
+                                <div className="my-5 mx-auto col-11 col-md-5">
+                                    <Link to={{ pathname: result.url }} style={{ textDecoration: 'none' }} target="_blank"> 
 
-                                    <div className="resultCard my-5 px-3 py-3 mx-auto col-11 col-md-5 rounded">
-                                        <h4 className="">{result.title}</h4>
-                                        <h6 className="mt-5">Date Created: {result.created_at}</h6>
-                                        <h6>Created By: {result.author}</h6>
-                                    </div>
-                                </Link>
+                                        <div className="resultCard rounded py-3 px-3">
+                                            <h4 className="">{result.title}</h4>
+                                            <h6 className="mt-5">Date Created: {result.created_at}</h6>
+                                            <h6>Created By: {result.author}</h6>
+                                        </div>
+                                    </Link>
+                                </div>
                             </Fade>
                         )
                     })}
@@ -81,7 +86,7 @@ function Search(props) {
             )    
         }else{
             return (
-                <div className="mx-auto my-5 col-10 col-md-5 text-break bg-primary">
+                <div className="mx-auto my-5 col-10 col-md-5 text-break">
                     <h3 className="my-5">No results found for "{searchInput}"</h3>
                 </div>
             )
