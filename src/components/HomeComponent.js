@@ -58,10 +58,10 @@ function Home(props) {
         <div className="container" id="searchInput">
             <h1 className="my-5 text-center">Hacker News Search</h1>
 
-            <div className="text-center">
+            <div>
                 <form onSubmit={onFormSubmit}>
                     <input 
-                        className="col-10 col-md-4" 
+                        className="row mx-auto col-10 col-md-7 col-lg-5" 
                         type="text" 
                         name="search" 
                         value={searchInput} 
@@ -70,7 +70,8 @@ function Home(props) {
 
                     {/*<p className="text-danger"><small>Please Enter A Valid Input.</small></p>*/}
 
-                    <Button className="col-10 col-md-2 btn-warning text-white mt-3"
+                    <Button 
+                        className="row col-10 col-md-2 btn-warning text-white mt-3"
                         type="submit"
                     >
                         Search
