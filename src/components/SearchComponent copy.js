@@ -1,49 +1,83 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { useLocation, Link, withRouter } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 
+import { fetchSearchResults } from '../redux/ActionCreators'
+//import { Reducer } from './redux/reducer'
+import { connect } from 'react-redux'
 
-/*class Search extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            
-        };
 
+const mapStateToProps = state => {
+    return {
+        isLoading: state.isLoading,
+        errMess: state.errMess,
+        searchResults: state.searchResults
     }
+}
 
-    render(){
-        return(
-            <div>Hello</div>
-        )
-    };
-};*/
+const mapDispatchToProps = {
+    //fetchCampsites
+    //addSearchQuery
+    fetchSearchResults 
+}
 
-
-
-function Search() {
+function Search(props) {
     const location = useLocation();
     const { searchInput } = location.state
-    const [error, setError] = useState(null);
+    console.log('search input');
+    console.log(searchInput);
+
+    /*const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);*/
 
     function RenderResults(){
-        if (searchResults.length !== 0){
+
+        if (props.isLoading){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+
+                    </div>
+                </div>
+            );
+        }
+
+        if (props.errMess){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <h4>{props.errMess}</h4>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        if (props.searchResults.length !== 0){
+            
+            let results = props.searchResults;
+
             return (
                 <React.Fragment>
+                    <h1 className="my-5">Showing results for"{searchInput}"</h1>
                     <Stagger in>
-                    {searchResults.map(result => {
+                    {results.map(result => {
                         return (
                             <Fade in key={result.objectID}>
-                                <Link to={{ pathname: result.url }} style={{ textDecoration: 'none' }} target="_blank"> 
+                                <div className="my-5 mx-auto col-11 col-md-5">
+                                    <Link to={{ pathname: result.url }} style={{ textDecoration: 'none' }} target="_blank"> 
 
-                                    <div className="resultCard my-5 px-3 py-3 mx-auto col-11 col-md-5 rounded">
-                                        <h4 className="">{result.title}</h4>
-                                        <h6 className="mt-5">Date Created: {result.created_at}</h6>
-                                        <h6>Created By: {result.author}</h6>
-                                    </div>
-                                </Link>
+                                        <div className="resultCard rounded py-3 px-3">
+                                            <h4 className="">{result.title}</h4>
+                                            <h6 className="mt-5">Date Created: {result.created_at}</h6>
+                                            <h6>Created By: {result.author}</h6>
+                                        </div>
+                                    </Link>
+                                </div>
                             </Fade>
                         )
                     })}
@@ -52,15 +86,23 @@ function Search() {
             )    
         }else{
             return (
-                <React.Fragment>No Results Found.</React.Fragment>
+                <div className="mx-auto my-5 col-10 col-md-5 text-break">
+                    <h3 className="my-5">No results found for "{searchInput}"</h3>
+                </div>
             )
         }
+
     }
 
     useEffect(() => {
+        console.log('on search page');
         console.log("search input state: " + searchInput);
+        console.log('props:');
+        console.log(props);
+        props.fetchSearchResults(searchInput);
+    
 
-        fetch(`http://hn.algolia.com/api/v1/search?query=${searchInput}`)
+        /*fetch(`http://hn.algolia.com/api/v1/search?query=${searchInput}`)
             .then(response => response.json())
             .then(
                 (result) => {
@@ -71,25 +113,35 @@ function Search() {
                     setIsLoaded(true);
                     setError(error);
                 }
-            )
+            )*/
     }, [searchInput]);
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }else if (!isLoaded) {
+    /*if (this.props.errMess) {
+        //return <div>Error: {error.message}</div>;
+        return <div>Error: insert error message here</div>;
+    }else if (this.props.isLoading) {
         return <div>Loading...</div>;
     }else {
-        console.log(searchResults);
+        //console.log(searchResults);
         return (
             <div className="mt-5">
                 <h1>Showing results for "{searchInput}"</h1>
                 <RenderResults />
             </div>
         )
-    }
+    }*/
+
+    return (
+        <div>
+            <RenderResults/>
+        </div>
+        
+
+
+    )
+    
 }
 
 
-
-export default Search;
-
+//export default Search;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
