@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Loading } from './LoadingComponent';
+import Loading from './LoadingComponent';
 import { useLocation, Link, withRouter } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 import RenderResults from './RenderResultsComponent';
@@ -64,7 +64,7 @@ function Search(props) {
 
     if (props.searchResults.length !== 0){
             
-        let results = props.searchResults;
+        //let results = props.searchResults;
 
         return (
             <RenderResults />

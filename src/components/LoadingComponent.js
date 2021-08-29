@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 
-export const Loading = () => {
+const Loading = () => {
     return (
         <div className="my-5 mx-auto">
             <FontAwesomeIcon icon={faSpinner} size="6x" spin className="my-5"/>
@@ -11,3 +11,5 @@ export const Loading = () => {
         </div>
     );
 }
+
+export default Loading;
