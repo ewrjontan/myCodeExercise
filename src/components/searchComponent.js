@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Loading } from './LoadingComponent';
 import { useLocation, Link, withRouter } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
+import RenderResults from './RenderResultsComponent';
 
 import { fetchSearchResults } from '../redux/ActionCreators'
 //import { Reducer } from './redux/reducer'
@@ -12,7 +13,8 @@ const mapStateToProps = state => {
     return {
         isLoading: state.isLoading,
         errMess: state.errMess,
-        searchResults: state.searchResults
+        searchResults: state.searchResults,
+        searchInput: state.searchInput
     }
 }
 
@@ -22,9 +24,11 @@ const mapDispatchToProps = {
 
 
 function Search(props) {
-    const location = useLocation();
-    const { searchInput } = location.state
+    //used for state passed through history.push()
+    /*const location = useLocation();
+    const { searchInput } = location.state*/
     console.log('search input');
+    let searchInput = props.searchInput;
     console.log(searchInput);
 
     useEffect(() => {
@@ -63,7 +67,7 @@ function Search(props) {
         let results = props.searchResults;
 
         return (
-            <RenderResults results={results} searchInput={searchInput}/>
+            <RenderResults />
         )    
     }else{
         return (
@@ -74,12 +78,13 @@ function Search(props) {
     }
 }
 
-function RenderResults(props){
+//need to add to return {/*<RenderResults results={results} searchInput={searchInput}/>*/}
+/*function RenderResults(props){
     console.log('props of renderResults');
     console.log(props);
     return (
         <div>
-            <h1 className="my-5">Showing results for"{props.searchInput}"</h1>
+            <h1 className="my-5">Showing results for "{props.searchInput}"</h1>
             <Stagger in>
                 {props.results.map(result => {
                     return (
@@ -88,8 +93,8 @@ function RenderResults(props){
                                 <Link to={{ pathname: result.url }} style={{ textDecoration: 'none' }} target="_blank"> 
 
                                     <div className="resultCard rounded py-3 px-3">
-                                        <h4 className="">{result.title}</h4>
-                                        <h6 className="mt-5">Date Created: {result.created_at}</h6>
+                                        <h3>{result.title}</h3>
+                                        <h6 className="mt-3">Date Created: {result.created_at}</h6>
                                         <h6>Created By: {result.author}</h6>
                                     </div>
                                 </Link>
@@ -100,6 +105,6 @@ function RenderResults(props){
             </Stagger>
         </div>
     )    
-};
+};*/
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

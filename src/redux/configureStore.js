@@ -14,12 +14,5 @@ export const ConfigureStore = () => {
         //initialState
     );
 
-    /*const store =  createStore(
-        combineReducers({
-            reducer: Reducer
-        }),
-        applyMiddleware(thunk, logger)
-    );*/
-
     return store;
 };

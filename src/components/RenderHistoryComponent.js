@@ -27,7 +27,7 @@ function RenderHistory(props) {
                     return (
                         <Fade in key={pastSearch.id}>
                                 <div className="resultCard rounded mx-auto col-11 col-md-5 col-lg-4 my-5 py-3 px-3 text-start">
-                                    <div className="row">
+                                    <div className="row pb-3">
                                         <h5 className="col-12 col-lg-6 col-xl-3">Search Query:</h5>
                                         <h5 className="col">{pastSearch.searchInput}</h5>
                                     </div>

@@ -32,6 +32,7 @@ export const Reducer = (state = {
     isLoading: true,
     errMess: null,
     searchResults: null, 
+    searchInput: null,
     searchHistory: []
 }, action) => {
     switch(action.type) {
@@ -41,9 +42,12 @@ export const Reducer = (state = {
             return {...state, isLoading: true, errMess: null, searchResults: null};
         case ActionTypes.SEARCH_RESULTS_FAILED:
             return {...state, isLoading: false, errMess: action.payload};    
+        case ActionTypes.UPDATE_SEARCH_INPUT:
+            const newSearchInput = action.payload;
+            return {...state, searchInput: newSearchInput}; 
         case ActionTypes.UPDATE_HISTORY:
             const searchQuery = action.payload;
-            return {...state, searchHistory: state.searchHistory.concat(searchQuery)};   
+            return {...state, searchHistory: state.searchHistory.concat(searchQuery)};  
         default:
             return state;
     }

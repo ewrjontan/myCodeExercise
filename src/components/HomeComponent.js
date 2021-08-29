@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Button } from 'reactstrap';
 import { withRouter, useHistory  } from 'react-router-dom';
 import { connect } from "react-redux";
-import { addSearchQuery } from '../redux/ActionCreators'
+import { addSearchQuery, updateSearchInput } from '../redux/ActionCreators'
 
 const mapStateToProps = state => {
     return {
@@ -11,7 +11,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    addSearchQuery
+    addSearchQuery,
+    updateSearchInput
 }
 
 //For input validation (matches characters after any white space at start of input)
@@ -47,11 +48,13 @@ function Home(props) {
             let newId = props.searchHistory.length;
             props.addSearchQuery(sanitizedInput, newId);
 
+            props.updateSearchInput(sanitizedInput);    
+            
             history.push({
                 pathname: "/search",
-                state: {
+                /*state: {
                     searchInput: sanitizedInput
-                }
+                }*/
             });
         }
     }, [searchInput]);

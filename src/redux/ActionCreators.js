@@ -40,6 +40,10 @@ export const addSearchResults = results => ({
     payload: results
 });
 
+export const updateSearchInput = searchInput => ({
+    type: ActionTypes.UPDATE_SEARCH_INPUT,
+    payload: searchInput
+});
 
 export const addSearchQuery = (searchInput, id) => (dispatch) => {
     const newSearchQuery = {
