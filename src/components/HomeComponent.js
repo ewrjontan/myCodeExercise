@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Button } from 'reactstrap';
 import { withRouter, useHistory  } from 'react-router-dom';
 import { connect } from "react-redux";
@@ -22,7 +22,9 @@ function Home(props) {
     const [searchInput, setSearchInput] = useState("");
     const history = useHistory();
 
-    const onFormSubmit = (e) => {
+    //useCallback to ensure function is only redefined upon update of searchInput
+    const onFormSubmit = useCallback(e => {
+    //const onFormSubmit = (e) => {
         e.preventDefault();
         console.log("submit button clicked");
         console.log('searchInput:');
@@ -52,7 +54,7 @@ function Home(props) {
                 }
             });
         }
-    }
+    }, [searchInput]);
 
     return (
         <div className="container" id="searchInput">
