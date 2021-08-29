@@ -75,6 +75,8 @@ function Search(props) {
 }
 
 function RenderResults(props){
+    console.log('props of renderResults');
+    console.log(props);
     return (
         <div>
             <h1 className="my-5">Showing results for"{props.searchInput}"</h1>
