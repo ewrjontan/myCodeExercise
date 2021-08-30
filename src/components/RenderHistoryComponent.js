@@ -1,4 +1,4 @@
-import React from 'react'; //needed for React.Fragment
+import React from 'react'; //needed for React.Fragment and createRef (used to avoid findDoMNode deprecation error)
 import { withRouter } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 import { connect } from 'react-redux'
@@ -18,7 +18,7 @@ function RenderHistory(props) {
             <Stagger in>
                 {historyReversed.map(pastSearch => {
                     return (
-                        <Fade in key={pastSearch.id}>
+                        <Fade in key={pastSearch.id} nodeRef={React.createRef()}>
                                 <div className="resultCard rounded mx-auto col-11 col-md-5 col-lg-4 my-5 py-3 px-3 text-start">
                                     
                                     <div className="row pb-3">

@@ -1,3 +1,4 @@
+import React from 'react'; //needed for React.Fragment and createRef (used to avoid findDoMNode deprecation error)
 import { Link, withRouter } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 import { connect } from 'react-redux'
@@ -31,7 +32,7 @@ function RenderResults(props){
                     }
 
                     return (
-                        <Fade in key={result.objectID}>
+                        <Fade in key={result.objectID} nodeRef={React.createRef()}>
                             <div className="my-5 mx-auto col-11 col-lg-5">
                                 <Link to={{ pathname: storyUrl }} style={{ textDecoration: 'none' }} target="_blank"> 
                                     <div className="resultCard rounded py-3 px-3">
