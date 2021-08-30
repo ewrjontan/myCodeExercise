@@ -5,7 +5,6 @@ import { Fade, Stagger } from 'react-animation-components';
 import RenderResults from './RenderResultsComponent';
 
 import { fetchSearchResults } from '../redux/ActionCreators'
-//import { Reducer } from './redux/reducer'
 import { connect } from 'react-redux'
 
 

@@ -6,7 +6,7 @@ import { addSearchQuery, updateSearchInput } from '../redux/ActionCreators'
 
 const mapStateToProps = state => {
     return {
-        searchHistory: state.searchHistory,    
+        searchHistory: state.history.searchHistory,    
     }
 }
 
@@ -19,7 +19,10 @@ const mapDispatchToProps = {
 const regex = /[a-zA-Z0-9_]+.*$/i;
 
 function Home(props) {
+    console.log('on home component');
+    console.log(props);
 
+    
     const [searchInput, setSearchInput] = useState("");
     const history = useHistory();
 

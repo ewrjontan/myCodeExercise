@@ -1,21 +1,11 @@
-import { combineReducers } from 'redux';
-import { HistoryReducer } from './HistoryReducer';
-import { SearchReducer } from './SearchReducer';
-
-//import * as ActionTypes from './ActionTypes';
-
-export const RootReducer = combineReducers({
-    history: HistoryReducer,
-    search: SearchReducer
-})
+import * as ActionTypes from './ActionTypes';
 
 
-/*export const Reducer = (state = {
+export const SearchReducer = (state = {
     isLoading: true,
     errMess: null,
     searchResults: null, 
-    searchInput: null,
-    searchHistory: []
+    searchInput: null
 }, action) => {
     switch(action.type) {
         case ActionTypes.ADD_SEARCH_RESULTS:
@@ -27,10 +17,7 @@ export const RootReducer = combineReducers({
         case ActionTypes.UPDATE_SEARCH_INPUT:
             const newSearchInput = action.payload;
             return {...state, searchInput: newSearchInput}; 
-        case ActionTypes.UPDATE_HISTORY:
-            const searchQuery = action.payload;
-            return {...state, searchHistory: state.searchHistory.concat(searchQuery)};  
         default:
             return state;
     }
-};*/
+};

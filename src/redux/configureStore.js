@@ -1,12 +1,19 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+
 //for redux-persist
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { Reducer, initialState } from './reducer';
-import thunk from 'redux-thunk';
 
-//import { createStore, combineReducers, applyMiddleware } from 'redux';
+/*import { Reducer } from './reducer';
+import { HistoryReducer } from './HistoryReducer';
+import { SearchReducer } from './SearchReducer';*/
+
+//for combine reducer
+import { RootReducer } from './reducer';
+
+
+import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
 
@@ -16,7 +23,9 @@ const persistConfig  = {
     storage
 }
 
-const persistedReducer = persistReducer(persistConfig, Reducer)
+//for before combine reducer
+//const persistedReducer = persistReducer(persistConfig, Reducer)
+const persistedReducer = persistReducer(persistConfig, RootReducer);
 
 export const ConfigureStore = () => {
     let store = createStore(persistedReducer, applyMiddleware(thunk, logger));

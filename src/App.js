@@ -1,6 +1,5 @@
-import React from 'react';
+//import React from 'react';
 import Main from './components/MainComponent';
-//import { Navbar, NavbarBrand } from 'reactstrap';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
