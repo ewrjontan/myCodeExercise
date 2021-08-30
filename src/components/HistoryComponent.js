@@ -4,15 +4,14 @@ import RenderHistory from './RenderHistoryComponent';
 import { Fade, Stagger } from 'react-animation-components';
 
 import { fetchCampsites } from '../redux/ActionCreators'
-//import { Reducer } from './redux/reducer'
 import { connect } from 'react-redux'
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.isLoading,
+        /*isLoading: state.isLoading,
         errMess: state.errMess,
-        campsites: state.campsites,
-        searchHistory: state.searchHistory,
+        campsites: state.campsites,*/
+        searchHistory: state.history.searchHistory,
     }
 }
 

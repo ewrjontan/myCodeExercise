@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = state => {
     return {
-        searchHistory: state.searchHistory,
+        searchHistory: state.history.searchHistory,
     }
 }
 

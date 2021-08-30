@@ -10,10 +10,10 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.isLoading,
-        errMess: state.errMess,
-        searchResults: state.searchResults,
-        searchInput: state.searchInput
+        isLoading: state.search.isLoading,
+        errMess: state.search.errMess,
+        searchResults: state.search.searchResults,
+        searchInput: state.search.searchInput
     }
 }
 
