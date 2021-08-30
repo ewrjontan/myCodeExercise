@@ -18,7 +18,7 @@ function RenderResults(props){
 
                     //Handles issue with api returning titles in either title or story_title objects
                     //Handles issue with api returning url in either url or story_url objects
-                    //Ex: enter search input of "Porsche Cayman"
+                    //Ex: check search input of "Porsche Cayman"
                     let storyTitle = result.title;
                     let storyUrl = result.url;
 

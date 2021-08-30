@@ -6,7 +6,6 @@ export const fetchSearchResults = (searchInput) => dispatch => {
     dispatch(searchResultsLoading());
 
     return fetch(`http://hn.algolia.com/api/v1/search?query=${searchInput}`)
-    //return fetch(`http://hn.algolia.com/api/v1/search?query=cars`)
         .then(response => {
                 if (response.ok){
                     return response;
@@ -51,7 +50,6 @@ export const addSearchQuery = (searchInput, id) => (dispatch) => {
         date: new Date().toISOString(),
         id: id
     }
-
     dispatch(updateHistory(newSearchQuery));
 };
 

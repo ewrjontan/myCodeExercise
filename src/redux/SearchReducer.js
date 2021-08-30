@@ -1,6 +1,5 @@
 import * as ActionTypes from './ActionTypes';
 
-
 export const SearchReducer = (state = {
     isLoading: true,
     errMess: null,
