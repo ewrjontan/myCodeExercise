@@ -19,13 +19,15 @@ const mapDispatchToProps = {
 };
 
 function Search(props) {
-    let searchInput = props.searchInput;
+    //let searchInput = props.searchInput;
+    let { searchInput, isLoading, errMess, searchResults, fetchSearchResults} = props;
 
     useEffect(() => {
-        props.fetchSearchResults(searchInput);
-    }, [searchInput]);
+        //props.fetchSearchResults(searchInput);
+        fetchSearchResults(searchInput);
+    }, [fetchSearchResults, searchInput]);
 
-    if (props.isLoading){
+    if (isLoading){
         return (
             <div className="container">
                 <div className="row">
@@ -35,20 +37,21 @@ function Search(props) {
         )
     };
 
-    if (props.errMess){
+    if (errMess){
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col">
-                        <h4>{props.errMess}</h4>
+                    <div className="col my-5">
+                        <h3>Uh-oh, looks like we had the following problem.</h3>
+                        <h1 className="my-5">{errMess}</h1>
+                        <h3>Please try again.</h3>
                     </div>
                 </div>
             </div>
         )
     };
 
-    if (props.searchResults.length !== 0){    
-        console.log(props.searchResults); 
+    if (searchResults.length !== 0){    
         return (
             <RenderResults />
         )    
