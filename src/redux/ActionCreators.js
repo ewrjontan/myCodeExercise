@@ -1,6 +1,5 @@
 import * as ActionTypes from './ActionTypes';
 
-
 export const fetchSearchResults = (searchInput) => dispatch => {
 
     dispatch(searchResultsLoading());
@@ -57,3 +56,8 @@ export const updateHistory = searchQuery => ({
     type: ActionTypes.UPDATE_HISTORY,
     payload: searchQuery
 });
+
+export const clearHistory = () => ({
+    type: ActionTypes.CLEAR_HISTORY,
+});
+

@@ -6,7 +6,9 @@ export const HistoryReducer = (state = {
     switch(action.type) {
         case ActionTypes.UPDATE_HISTORY:
             const searchQuery = action.payload;
-            return {...state, searchHistory: state.searchHistory.concat(searchQuery)};  
+            return {...state, searchHistory: state.searchHistory.concat(searchQuery)}; 
+        case ActionTypes.CLEAR_HISTORY:
+            return {...state, searchHistory: []};  
         default:
             return state;
     }
