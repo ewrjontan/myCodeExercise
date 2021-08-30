@@ -19,10 +19,12 @@ const mapDispatchToProps = {
 const regex = /[a-zA-Z0-9_]+.*$/i;
 
 function Home(props) {
+    let { searchHistory, addSearchQuery, updateSearchInput } = props;
+
     const [searchInput, setSearchInput] = useState("");
     const history = useHistory();
 
-    //useCallback to ensure function is only redefined upon update of searchInput
+    //useCallback to ensure function is only redefined upon update of props
     const onFormSubmit = useCallback(e => {
         e.preventDefault();
         
@@ -32,13 +34,13 @@ function Home(props) {
             let sanitizedInput = searchInput.match(regex)[0];
             
             //add sanitized search input and id into redux searchHistory state
-            let newId = props.searchHistory.length;
-            props.addSearchQuery(sanitizedInput, newId);
-            props.updateSearchInput(sanitizedInput);    
+            let newId = searchHistory.length;
+            addSearchQuery(sanitizedInput, newId);
+            updateSearchInput(sanitizedInput);    
             
             history.push({pathname: "/search"});
         }
-    }, [searchInput]);
+    }, [searchInput, addSearchQuery, updateSearchInput, history, searchHistory.length]);
 
     return (
         <div className="container" id="searchInput">

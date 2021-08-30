@@ -9,10 +9,10 @@ function Main() {
         <div>
             <Header />
             <Switch>
-                <Route path='/home' component={Home} />
+                <Route path='/home' component={Home}/>
                 <Route path='/search' component={Search}/>
                 <Route path='/history' component={History}/>
-                <Redirect to='/home' />
+                <Redirect to='/home'/>
             </Switch>
         </div>
     )

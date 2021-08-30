@@ -19,11 +19,9 @@ const mapDispatchToProps = {
 };
 
 function Search(props) {
-    //let searchInput = props.searchInput;
     let { searchInput, isLoading, errMess, searchResults, fetchSearchResults} = props;
 
     useEffect(() => {
-        //props.fetchSearchResults(searchInput);
         fetchSearchResults(searchInput);
     }, [fetchSearchResults, searchInput]);
 
