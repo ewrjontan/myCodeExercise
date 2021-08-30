@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.App {
+  text-align: center;
+}
+
 #searchInput{
   margin-top: 200px;
 }
@@ -20,3 +24,4 @@ code {
   background-color: #5466A6; 
   color: white;
 }
+
