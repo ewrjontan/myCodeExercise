@@ -17,10 +17,11 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
 
-
+//whitelisting 'history' so only history is rehydrated and not the search input/results from the last session
 const persistConfig  = {
     key: 'root',
-    storage
+    storage,
+    whitelist: ['history']
 }
 
 //for before combine reducer
