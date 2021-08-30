@@ -56,7 +56,7 @@ function Home(props) {
                     />
 
                     <Button 
-                        className="row col-10 col-md-2 btn-warning text-white mt-3"
+                        className="row col-10 col-md-2 btn-warning text-white mt-4"
                         type="submit"
                     >
                         Search

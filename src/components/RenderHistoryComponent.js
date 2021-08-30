@@ -1,4 +1,4 @@
-import React from 'react'; //needed for React.Fragment and createRef (used to avoid findDoMNode deprecation error)
+import React from 'react'; //needed for React.Fragment and createRef (used to get rid of findDoMNode deprecation error)
 import { withRouter } from 'react-router-dom';
 import { Fade, Stagger } from 'react-animation-components';
 import { connect } from 'react-redux'

@@ -23,15 +23,15 @@ function History(props){
 
     if (props.searchHistory.length === 0){
         return (
-            <h1 className="mt-5">No searches have been made.</h1>  
+            <h1 className="mt-5 px-3">No searches have been made.</h1>  
         ) 
     }else{
         return (
-            <div className="mt-5">
+            <div className="mt-5 px-3">
                 <h1>Search History</h1>
 
                 <Button 
-                    className="row col-10 col-md-2 btn-warning text-white mt-3"
+                    className="row col-11 col-md-2 btn-warning text-white mt-3"
                     onClick={handleClearHistory}
                 >
                     Clear History
